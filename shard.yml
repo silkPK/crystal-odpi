@@ -1,4 +1,4 @@
-name: crystal-odpi
+name: odpi
 version: 0.1.0
 
 authors:
@@ -6,7 +6,7 @@ authors:
 
 targets:
   crystal-odpi:
-    main: src/crystal-odpi.cr
+    main: src/odpi.cr
 
 crystal: 1.6.2
 

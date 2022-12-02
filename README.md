@@ -8,7 +8,7 @@ Oracle Database Programming Interface for C (ODPI-C) is an open source library o
 
    ```yaml
    dependencies:
-     oracle:
+     odpi:
        github: silkPK/crystal-odpi
    ```
 
