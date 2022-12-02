@@ -89,7 +89,7 @@ module ODPI
     end
 
     def next_column_index : Int32
-      @column_index
+      @col_index.to_i32
     end
 
     def move_next : Bool
@@ -162,7 +162,7 @@ module ODPI
     end
 
     def read(t : Bool.class) : Bool
-      # TODO
+      read(Int64?).try &.!=(0)
     end
 
     def read(t : Time.class, pattern : String = "%Y-%m-%d %H:%M:%S.%N") : Time

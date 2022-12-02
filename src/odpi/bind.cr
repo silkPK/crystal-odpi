@@ -67,7 +67,7 @@ module ODPI
     private def arg_as_dpi_data(t : Bool.class, arg)
       buffer = LibODPI::DpiData.new
 
-      buffer.value.isNull = 0
+      buffer.isNull = 0
       if arg
         buffer.value.asBoolean = 1
       else
