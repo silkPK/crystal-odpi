@@ -1,5 +1,5 @@
 @[Link("odpic")]
-lib ODPI
+lib LibODPI
 
   # define ODPI-C version information
   DPI_MAJOR_VERSION = 4
@@ -378,14 +378,10 @@ lib ODPI
   type DpiDeqOptions = Void
   type DpiEnqOptions = Void
   type DpiJson = Void
-  type DpiLob = Void
   type DpiMsgProps = Void
-  type DpiObject = Void
   type DpiObjectAttr = Void
-  type DpiObjectType = Void
   type DpiPool = Void
   type DpiQueue = Void
-  type DpiRowid = Void
   type DpiSodaColl = Void
   type DpiSodaCollCursor = Void
   type DpiSodaDb = Void
@@ -399,24 +395,12 @@ lib ODPI
   # Forward Declarations of Other Types
   #-----------------------------------------------------------------------------
 
-  type DpiAppContext = Void
-  type DpiCommonCreateParams = Void
-  type DpiConnCreateParams = Void
-  type DpiContextCreateParams = Void
-  type DpiData = Void
-  type DpiDataBuffer = Void
-  type DpiDataTypeInfo = Void
-  type DpiEncodingInfo = Void
-  type DpiErrorInfo = Void
   type DpiJsonNode = Void
   type DpiObjectAttrInfo = Void
   type DpiObjectTypeInfo = Void
   type DpiPoolCreateParams = Void
-  type DpiQueryInfo = Void
-  type DpiShardingKeyColumn = Void
   type DpiSodaCollNames = Void
   type DpiSodaOperOptions = Void
-  type DpiStmtInfo = Void
   type DpiSubscrCreateParams = Void
   type DpiSubscrMessage = Void
   type DpiSubscrMessageQuery = Void
@@ -516,7 +500,7 @@ lib ODPI
     editionLength : UInt32
     driverName : UInt8*
     driverNameLength : UInt32
-    sodaMetadataCache : Int
+    sodaMetadataCache : Int8
     stmtCacheSize : UInt32
   end
 
@@ -530,20 +514,20 @@ lib ODPI
       newPasswordLength : UInt32
       appContext : DpiAppContext*
       numAppContext : UInt32
-      externalAuth : Int
+      externalAuth : Int8
       externalHandle : Void*
       pool : DpiPool*
       tag : UInt32
       tagLength : UInt32
-      matchAnyTag : Int
+      matchAnyTag : Int8
       outTag : UInt8*
       outTagLength : UInt32
-      outTagFound : Int
+      outTagFound : Int8
       shardingKeyColumns : DpiShardingKeyColumn*
       numShardingKeyColumns : UInt8
       superShardingKeyColumns : DpiShardingKeyColumn*
       numSuperShardingKeyColumns : UInt8
-      outNewSession : Int
+      outNewSession : Int8
   end
 
   # structure used for creating connections
@@ -613,12 +597,12 @@ lib ODPI
 
   # structure used for transferring statement information from ODPI-C
   struct DpiStmtInfo
-      isQuery : Int
-      isPLSQL : Int
-      isDDL : Int
-      isDML : Int
+      isQuery : Int8
+      isPLSQL : Int8
+      isDDL : Int8
+      isDML : Int8
       statementType : DpiStatementType
-      isReturning : Int
+      isReturning : Int8
   end
 
   union DpiReferenceBuffer

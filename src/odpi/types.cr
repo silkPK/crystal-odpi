@@ -3,80 +3,80 @@ module ODPI
     extend self
 
     def as_oracle_type_num(t : Int32.class)
-      ODPI::DpiOracleTypeNum::Number
+      LibODPI::DpiOracleTypeNum::Number
     end
 
     def as_oracle_type_num(t : Int64.class)
-      ODPI::DpiOracleTypeNum::Number
+      LibODPI::DpiOracleTypeNum::Number
     end
 
     def as_oracle_type_num(t : UInt32.class)
-      ODPI::DpiOracleTypeNum::Number
+      LibODPI::DpiOracleTypeNum::Number
     end
 
     def as_oracle_type_num(t : UInt64.class)
-      ODPI::DpiOracleTypeNum::Number
+      LibODPI::DpiOracleTypeNum::Number
     end
 
     def as_oracle_type_num(t : Float32.class)
-      ODPI::DpiOracleTypeNum::Number
+      LibODPI::DpiOracleTypeNum::Number
     end
 
     def as_oracle_type_num(t : Float64.class)
-      ODPI::DpiOracleTypeNum::Number
+      LibODPI::DpiOracleTypeNum::Number
     end
 
     def as_oracle_type_num(t : Bool.class)
-      ODPI::DpiOracleTypeNum::Boolean
+      LibODPI::DpiOracleTypeNum::Boolean
     end
 
     def as_oracle_type_num(t : Time.class, pattern : String = "%Y-%m-%d %H:%M:%S.%N")
       # TODO
-      ODPI::DpiOracleTypeNum::Date
+      LibODPI::DpiOracleTypeNum::Date
     end
 
     def as_oracle_type_num(t : String.class)
-      ODPI::DpiOracleTypeNum::Nvarchar
+      LibODPI::DpiOracleTypeNum::Nvarchar
     end
 
     def as_native_type_num(t : Int32.class)
-      ODPI::DpiNativeTypeNum::Int64
+      LibODPI::DpiNativeTypeNum::Int64
     end
 
     def as_native_type_num(t : Int64.class)
-      ODPI::DpiNativeTypeNum::Int64
+      LibODPI::DpiNativeTypeNum::Int64
     end
 
     def as_native_type_num(t : UInt32.class)
-      ODPI::DpiNativeTypeNum::Uint64
+      LibODPI::DpiNativeTypeNum::Uint64
     end
 
     def as_native_type_num(t : UInt64.class)
-      ODPI::DpiNativeTypeNum::Uint64
+      LibODPI::DpiNativeTypeNum::Uint64
     end
 
     def as_native_type_num(t : Float32.class)
-      ODPI::DpiNativeTypeNum::Float
+      LibODPI::DpiNativeTypeNum::Float
     end
 
     def as_native_type_num(t : Float64.class)
-      ODPI::DpiNativeTypeNum::Double
+      LibODPI::DpiNativeTypeNum::Double
     end
 
     def as_native_type_num(t : Bool.class)
-      ODPI::DpiNativeTypeNum::Boolean
+      LibODPI::DpiNativeTypeNum::Boolean
     end
 
     def as_native_type_num(t : Time.class, pattern : String = "%Y-%m-%d %H:%M:%S.%N")
-      ODPI::DpiNativeTypeNum::Timestamp
+      LibODPI::DpiNativeTypeNum::Timestamp
     end
 
     def as_native_type_num(t : String.class)
-      ODPI::DpiNativeTypeNum::Bytes
+      LibODPI::DpiNativeTypeNum::Bytes
     end
 
     def as_native_type_num(t : NoReturn.class)
-      ODPI::DpiNativeTypeNum::Null
+      LibODPI::DpiNativeTypeNum::Null
     end
   end
 end

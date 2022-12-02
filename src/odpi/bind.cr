@@ -8,11 +8,11 @@ module ODPI
         data = arg_as_dpi_data(typeof(arg), arg)
         native_type = Type.as_native_type_num(typeof(arg))
 
-        res = ODPI.dpi_stmt_bind_value_by_pos(stmt.raw_stmt, i + 1, native_type,
+        res = LibODPI.dpi_stmt_bind_value_by_pos(stmt.raw_stmt, i + 1, native_type,
                                               pointerof(data))
-        if res != ODPI::DPI_SUCCESS
-          error_info = ODPI::DpiErrorInfo.new
-          ODPI.dpi_context_get_error(stmt.connection.raw_context,
+        if res != LibODPI::DPI_SUCCESS
+          error_info = LibODPI::DpiErrorInfo.new
+          LibODPI.dpi_context_get_error(stmt.connection.raw_context,
                                      pointerof(error_info))
           error_msg = String.new(error_info.message)
           raise "Error binding arguments by position: #{error_msg}"
@@ -25,7 +25,7 @@ module ODPI
     end
 
     private def arg_as_dpi_data(t : Int64.class, arg)
-      buffer = ODPI::DpiData.new
+      buffer = LibODPI::DpiData.new
 
       buffer.isNull = 0
       buffer.value.asInt64 = arg
@@ -38,7 +38,7 @@ module ODPI
     end
 
     private def arg_as_dpi_data(t : UInt64.class, arg)
-      buffer = ODPI::DpiData.new
+      buffer = LibODPI::DpiData.new
 
       buffer.isNull = 0
       buffer.value.asUint64 = arg
@@ -47,7 +47,7 @@ module ODPI
     end
 
     private def arg_as_dpi_data(t : Float32.class, arg)
-      buffer = ODPI::DpiData.new
+      buffer = LibODPI::DpiData.new
 
       buffer.isNull = 0
       buffer.value.asFloat = arg
@@ -56,7 +56,7 @@ module ODPI
     end
 
     private def arg_as_dpi_data(t : Float64.class, arg)
-      buffer = ODPI::DpiData.new
+      buffer = LibODPI::DpiData.new
 
       buffer.isNull = 0
       buffer.value.asDouble = arg
@@ -65,7 +65,7 @@ module ODPI
     end
 
     private def arg_as_dpi_data(t : Bool.class, arg)
-      buffer = ODPI::DpiData.new
+      buffer = LibODPI::DpiData.new
 
       buffer.value.isNull = 0
       if arg
@@ -78,12 +78,12 @@ module ODPI
     end
 
     private def arg_as_dpi_data(t : Time.class, arg)
-      buffer = ODPI::DpiData.new
+      buffer = LibODPI::DpiData.new
       # TODO
     end
 
     private def arg_as_dpi_data(t : String.class, arg)
-      buffer = ODPI::DpiData.new
+      buffer = LibODPI::DpiData.new
 
       arg.check_no_null_byte
 
