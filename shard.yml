@@ -10,4 +10,8 @@ targets:
 
 crystal: 1.6.2
 
+dependencies:
+  db:
+    github: crystal-lang/crystal-db
+
 license: MIT
