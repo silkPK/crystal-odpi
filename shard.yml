@@ -1,0 +1,13 @@
+name: crystal-odpi
+version: 0.1.0
+
+authors:
+  - silkPK <alessandro.rusani@gmail.com>
+
+targets:
+  crystal-odpi:
+    main: src/crystal-odpi.cr
+
+crystal: 1.6.2
+
+license: MIT
