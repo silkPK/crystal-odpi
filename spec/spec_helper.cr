@@ -10,7 +10,6 @@ def with_db(&block : DB::Database ->)
 end
 
 def with_cnn(&block : DB::Connection ->)
-    puts DB_URL
   DB.connect "#{DB_URL}", &block
 end
 
