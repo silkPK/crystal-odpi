@@ -23,15 +23,14 @@ require "odpi"
 DB.open "odpi://user:password@host:port/SID" do |db|
   db.exec "BEGIN EXECUTE IMMEDIATE 'drop table person'; EXCEPTION WHEN OTHERS THEN NULL; END;"
   db.exec "create table person (name varchar(30), age int)"
-  db.exec "insert into person values (:1, :2)", "Ben Buddy", 28
+  db.exec "insert into person (name,age) values ('Paolino Paperino', 28)"
 
   puts "max age:"
-  puts db.scalar "select max(age) from contacts" # => 33
+  puts db.scalar "select max(age) from person"
 
   puts "person:"
   db.query "select name, age from person order by age desc" do |res|
     puts "#{res.column_name(0)} (#{res.column_name(1)})"
-    # => name (age)
     res.each do
       puts "#{res.read} (#{res.read})"
     end
