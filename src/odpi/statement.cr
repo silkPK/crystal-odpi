@@ -18,6 +18,7 @@ module ODPI
     protected def perform_query(args : Enumerable) : DB::ResultSet
       null = Pointer(Void).null
       conn = raw_conn()
+
       res = LibODPI.dpi_conn_prepare_stmt(conn, 0, @query, @query.size,
                                        Pointer(UInt8).null, 0,
                                        out @raw_stmt)

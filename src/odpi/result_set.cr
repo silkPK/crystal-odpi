@@ -17,12 +17,13 @@ module ODPI
           String.new(slice)
         elsif typenum == LibODPI::DpiNativeTypeNum::Int64
           @value.value.value.asInt64
+        elsif typenum == LibODPI::DpiNativeTypeNum::Double
+          @value.value.value.asDouble
         end
     end
   end
 
   class ResultSet < DB::ResultSet
-    @col_index : UInt32
     @col_names : Array(String)
     @data_buffer : LibODPI::DpiData*
     @error_info : LibODPI::DpiErrorInfo
@@ -33,7 +34,7 @@ module ODPI
     def initialize(statement : Statement, @num_cols)
       super(statement)
 
-      @col_index = 1
+      @column_index = 0
       @data_buffer = Pointer(LibODPI::DpiData).null
       @col_names = Array(String).new
 
@@ -56,16 +57,15 @@ module ODPI
     end
 
     protected def fetch_next_field
-      res = LibODPI.dpi_stmt_get_query_value(@raw_stmt, @col_index, out typenum,
+      res = LibODPI.dpi_stmt_get_query_value(@raw_stmt, @column_index, out typenum,
                                           pointerof(@data_buffer))
-
       if res != LibODPI::DPI_SUCCESS
         LibODPI.dpi_context_get_error(@raw_context, pointerof(@error_info))
         error_msg = String.new(@error_info.message)
-        raise "Error fetching column #{@col_index}: #{error_msg}"
+        raise "Error fetching column #{@column_index}: #{error_msg}"
       end
 
-      name = @col_names[@col_index - 1]
+      name = @col_names[@column_index - 1]
       Field.new(name, @data_buffer, typenum)
     end
 
@@ -89,7 +89,7 @@ module ODPI
     end
 
     def next_column_index : Int32
-      @col_index.to_i32
+      @column_index
     end
 
     def move_next : Bool
@@ -102,63 +102,47 @@ module ODPI
       if found != 1
         false
       else
-        @col_index = 1
+        @column_index = 1
         true
       end
     end
 
     def read
       field = fetch_next_field
-      @col_index += 1
+      @column_index += 1
       field.value
     end
 
     def read(t : Int32.class) : Int32
-      # TODO
+      read(Int64).to_i32
     end
 
     def read(t : Int32?.class) : Int32?
-      # TODO
+      read(Int64?).try &.to_i32
     end
 
     def read(t : Int64.class) : Int64
-      # TODO
+      read(Int64).to_i64
     end
 
     def read(t : Int64?.class) : Int64?
-      # TODO
-    end
-
-    def read(t : UInt32.class) : UInt32
-      # TODO
-    end
-
-    def read(t : UInt32?.class) : UInt32?
-      # TODO
-    end
-
-    def read(t : UInt64.class) : UInt64
-      # TODO
-    end
-
-    def read(t : UInt64?.class) : UInt64?
-      # TODO
+      read(Int64?).try &.to_i64
     end
 
     def read(t : Float32.class) : Float32
-      # TODO
+      read(Float64).to_f32
     end
 
     def read(t : Float32?.class) : Float32?
-      # TODO
+      read(Float64?).try &.to_f32
     end
 
     def read(t : Float64.class) : Float64
-      # TODO
+      read(Float64).to_f64
     end
 
     def read(type : Float64?.class) : Float64?
-      # TODO
+      read(Float64?).try &.to_f64
     end
 
     def read(t : Bool.class) : Bool
@@ -166,15 +150,24 @@ module ODPI
     end
 
     def read(t : Time.class, pattern : String = "%Y-%m-%d %H:%M:%S.%N") : Time
-      # TODO
+            # TODO
+       field = fetch_next_field
+      @column_index += 1
+      field.value
     end
 
     def read(t : String.class) : String
-      # TODO
+            # TODO
+       field = fetch_next_field
+      @column_index += 1
+      field.value
     end
 
     def read(type : String?.class) : String?
-      # TODO
+            # TODO
+       field = fetch_next_field
+      @column_index += 1
+      field.value
     end
 
     protected def do_close
