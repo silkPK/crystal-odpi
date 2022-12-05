@@ -38,6 +38,8 @@ module ODPI
         LibODPI.dpi_context_get_error(connection.raw_context, pointerof(error_info))
         error_msg = String.new(error_info.message)
         raise "Error executing statement #{error_msg}"
+      else
+        LibODPI.dpi_conn_commit(raw_conn)
       end
 
       ResultSet.new(self, num_cols)
