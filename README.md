@@ -2,6 +2,8 @@
 
 Crystal ODPI driver implements [crystal-db](https://github.com/crystal-lang/crystal-db) API and is a wrapper around [ODPI-C](https://github.com/oracle/odpi).
 
+This is derived from [crystal-oracle](https://github.com/sourgrasses/crystal-oracle) library.
+
 Oracle Database Programming Interface for C (ODPI-C) is an open source library of C code that simplifies access to Oracle Database for applications written in C or C++.
 
 1. Add the dependency to your `shard.yml`:
