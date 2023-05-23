@@ -54,4 +54,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [silkPK](https://github.com/your-github-user) - creator and maintainer
+- [silkPK](https://github.com/silkPK) - creator and maintainer
